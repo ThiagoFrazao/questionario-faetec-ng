@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+  <figure><img src="assets/titulo.png" alt="Africa"></figure><h1>um olhar interdisciplinar</h1>
+</mat-toolbar>
+
+<div class="questionnaire">
+  <div class="question" *ngFor="let question of questions">
+    <div class="question__title">{{ question.title }}</div>
+    <div class="question__options" fxLayout="column">
+      <div *ngIf="question?.image">
+        <img src="{{question.image}}" alt="Pessoa">
+      </div>
+      <div class="question__option" fxLayout="column" *ngFor="let option of question.options">
+        <label>
+          <input type="radio" name="{{ question.id }}" [(ngModel)]="question.selectedOption" [value]="option">{{ option }}
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer fxLayout="collumn" class="footer">
+  <div fxLayout="row">
+    <figure>
+      <img src="assets/faetec_2019-8089662.png" alt="FAETEC">
+    </figure>
+  </div>
+</footer>
+
