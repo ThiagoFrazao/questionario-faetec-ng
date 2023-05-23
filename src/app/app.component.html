@@ -1,22 +1,31 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" xmlns="http://www.w3.org/1999/html">
   <figure><img src="assets/titulo.png" alt="Africa"></figure><h1>um olhar interdisciplinar</h1>
 </mat-toolbar>
 
-<div class="questionnaire">
-  <div class="question" *ngFor="let question of questions">
-    <div class="question__title">{{ question.title }}</div>
-    <div class="question__options" fxLayout="column">
-      <div *ngIf="question?.image">
-        <img src="{{question.image}}" alt="Pessoa">
+<form [formGroup]="form" *ngIf="quizQuestions.length > 0" (ngSubmit)="responderQuiz()">
+  <div class="questionnaire">
+    <ng-container *ngFor="let question of quizQuestions; let i = index">
+      <div class="question" fxLayout="row" fxLayoutGap="15px">
+        <label [for]="'question'+i" class="question__title">{{ question.question }}</label>
+        <div *ngIf="question?.image" fxLayout="collumn">
+          <img src="{{question.image}}" alt="Pessoa">
+        </div>
+        <div class="question__options" fxLayout="column">
+          <ng-container *ngFor="let option of question.responses">
+            <mat-radio-group [name]="'question'+i"  [formControlName]="'question'+i">
+              <label fxFlex>
+                <mat-radio-button [value]="option.response"></mat-radio-button>
+                {{ option.description }}
+              </label>
+            </mat-radio-group>
+          </ng-container>
+        </div>
       </div>
-      <div class="question__option" fxLayout="column" *ngFor="let option of question.options">
-        <label>
-          <input type="radio" name="{{ question.id }}" [(ngModel)]="question.selectedOption" [value]="option">{{ option }}
-        </label>
-      </div>
-    </div>
+    </ng-container>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Enviar</button>
   </div>
-</div>
+</form>
+
 
 <footer fxLayout="collumn" class="footer">
   <div fxLayout="row">
