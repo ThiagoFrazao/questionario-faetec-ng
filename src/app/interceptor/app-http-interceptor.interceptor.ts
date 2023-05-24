@@ -13,7 +13,6 @@ export class AppHttpInterceptorInterceptor implements HttpInterceptor {
   constructor() {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log("intercepted request ... " + request.url);
     request = request.clone({
       setHeaders: {
         'Access-Control-Allow-Origin': '*',
@@ -21,7 +20,6 @@ export class AppHttpInterceptorInterceptor implements HttpInterceptor {
         'Access-Control-Allow-Methods': 'GET,POST,PUT,DELETE,OPTIONS'
       }
     });
-    console.log("intercepted request ... " + JSON.stringify(request.headers));
     return next.handle(request);
   }
 }

@@ -10,8 +10,11 @@ export interface QuizQuestion {
   image?: string;
   responses?: QuizOption[];
 }
-
 export interface UserResponse {
-  pergunta: QuizQuestion;
-  resposta: QuizOption;
+  perguntaId: number;
+  respostaId: number;
+}
+
+export interface QuizError {
+  message: string;
 }

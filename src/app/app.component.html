@@ -1,18 +1,17 @@
-<mat-toolbar color="primary" xmlns="http://www.w3.org/1999/html">
-  <figure><img src="assets/titulo.png" alt="Africa"></figure><h1>um olhar interdisciplinar</h1>
-</mat-toolbar>
+<app-header></app-header>
 
-<form [formGroup]="form" *ngIf="quizQuestions.length > 0" (ngSubmit)="responderQuiz()">
-  <div class="questionnaire">
+<body>
+<div class="questionnaire">
+  <form [formGroup]="form" *ngIf="quizQuestions.length > 0 && isApresentarForm" (ngSubmit)="responderQuiz()">
     <ng-container *ngFor="let question of quizQuestions; let i = index">
       <div class="question" fxLayout="row" fxLayoutGap="15px">
-        <label [for]="'question'+i" class="question__title">{{ question.question }}</label>
+        <label [for]="question.id.toString()" class="question__title">{{ question.question }}</label>
         <div *ngIf="question?.image" fxLayout="collumn">
           <img src="{{question.image}}" alt="Pessoa">
         </div>
         <div class="question__options" fxLayout="column">
           <ng-container *ngFor="let option of question.responses">
-            <mat-radio-group [name]="'question'+i"  [formControlName]="'question'+i">
+            <mat-radio-group [name]="question.id.toString()" [formControlName]="question.id.toString()">
               <label fxFlex>
                 <mat-radio-button [value]="option.response"></mat-radio-button>
                 {{ option.description }}
@@ -22,16 +21,13 @@
         </div>
       </div>
     </ng-container>
-    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Enviar</button>
-  </div>
-</form>
+    <button mat-raised-button color="primary" type="submit">Enviar</button>
+  </form>
+  <app-grafico-resultado
+    (retornarParaForm)="this.apresentarForm()"
+    *ngIf="isApresentarGrafico"
+  ></app-grafico-resultado>
+</div>
+</body>
 
-
-<footer fxLayout="collumn" class="footer">
-  <div fxLayout="row">
-    <figure>
-      <img src="assets/faetec_2019-8089662.png" alt="FAETEC">
-    </figure>
-  </div>
-</footer>
-
+<app-footer></app-footer>
