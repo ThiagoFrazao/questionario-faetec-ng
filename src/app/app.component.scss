@@ -4,13 +4,21 @@
   object-fit: cover;
 }
 
+.content--container {
+  position: relative;
+  min-height: 100vh;
+}
+
 .questionnaire {
   max-width: 500px;
   font-size: 16px;
   line-height: 1.5;
   padding: 20px;
   overflow:auto;
+  padding-bottom: 100px;
   margin: 0 auto 100px auto;
+  position: relative;
+  min-height: 100vh;
 }
 
 .question {
@@ -20,14 +28,19 @@
   border-radius: 5px;
 }
 
+.question__box {
+  border-bottom: 2px solid black;
+  margin-bottom: 5px;
+}
+
 .question__title {
   font-weight: bold;
-  margin-bottom: 10px;
 }
 
 .question__options {
   display: block;
   flex-wrap: wrap;
+  margin-left: 10px;
 }
 
 .question__option {

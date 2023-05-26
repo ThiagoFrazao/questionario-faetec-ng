@@ -18,3 +18,13 @@ export interface UserResponse {
 export interface QuizError {
   message: string;
 }
+
+export interface QuestionData {
+  name: string;
+  value: number;
+}
+
+export interface GraphData {
+  nome: string;
+  dadosPerguntas: QuestionData[];
+}

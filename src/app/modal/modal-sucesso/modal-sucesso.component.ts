@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from "@angular/material/dialog";
-import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-modal-sucesso',
@@ -12,8 +11,7 @@ export class ModalSucessoComponent implements OnInit {
   private _msgModal: string;
 
   constructor(
-    public _modalDialog: MatDialogRef<ModalSucessoComponent>,
-    private router: Router) {
+    public _modalDialog: MatDialogRef<ModalSucessoComponent>) {
     this._msgModal = "Obrigado por participar! Questionário respondido com sucesso.";
   }
 
@@ -22,7 +20,6 @@ export class ModalSucessoComponent implements OnInit {
 
   public fecharModal():void {
     this.modalDialog.close();
-    this.router.navigate(["quiz/sucesso"]);
   }
 
   get msgModal(): string {

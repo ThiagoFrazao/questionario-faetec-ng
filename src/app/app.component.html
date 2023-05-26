@@ -1,33 +1,41 @@
 <app-header></app-header>
 
 <body>
-<div class="questionnaire">
-  <form [formGroup]="form" *ngIf="quizQuestions.length > 0 && isApresentarForm" (ngSubmit)="responderQuiz()">
-    <ng-container *ngFor="let question of quizQuestions; let i = index">
-      <div class="question" fxLayout="row" fxLayoutGap="15px">
-        <label [for]="question.id.toString()" class="question__title">{{ question.question }}</label>
-        <div *ngIf="question?.image" fxLayout="collumn">
-          <img src="{{question.image}}" alt="Pessoa">
+<div class="content--container">
+  <div class="questionnaire">
+    <form [formGroup]="form" *ngIf="quizQuestions.length > 0 && isApresentarForm" (ngSubmit)="responderQuiz()">
+      <ng-container *ngFor="let question of quizQuestions; let i = index">
+        <div class="question" fxLayout="column" fxLayoutGap="15px">
+          <div class="question__box" fxLayout="column" fxLayoutAlign="center center">
+            <label [for]="question.id.toString()" class="question__title" fxLayout="column">{{ question.question }}</label>
+          </div>
+          <div fxLayout="row">
+            <div *ngIf="question?.image" fxLayout="collumn">
+              <img src="{{question.image}}" alt="Pessoa">
+            </div>
+            <div class="question__options" fxLayout="column">
+              <ng-container *ngFor="let option of question.responses">
+                <mat-radio-group [name]="question.id.toString()" [formControlName]="question.id.toString()">
+                  <label fxFlex>
+                    <mat-radio-button [value]="option.response"></mat-radio-button>
+                    {{ option.description }}
+                  </label>
+                </mat-radio-group>
+              </ng-container>
+            </div>
+          </div>
         </div>
-        <div class="question__options" fxLayout="column">
-          <ng-container *ngFor="let option of question.responses">
-            <mat-radio-group [name]="question.id.toString()" [formControlName]="question.id.toString()">
-              <label fxFlex>
-                <mat-radio-button [value]="option.response"></mat-radio-button>
-                {{ option.description }}
-              </label>
-            </mat-radio-group>
-          </ng-container>
-        </div>
-      </div>
-    </ng-container>
-    <button mat-raised-button color="primary" type="submit">Enviar</button>
-  </form>
-  <app-grafico-resultado
-    (retornarParaForm)="this.apresentarForm()"
-    *ngIf="isApresentarGrafico"
-  ></app-grafico-resultado>
+      </ng-container>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Enviar</button>
+    </form>
+    <app-grafico-resultado
+      (retornarParaForm)="this.apresentarForm()"
+      *ngIf="isApresentarGrafico"
+    ></app-grafico-resultado>
+  </div>
+  <app-footer></app-footer>
 </div>
+
 </body>
 
-<app-footer></app-footer>
+
