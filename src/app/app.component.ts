@@ -101,4 +101,8 @@ export class AppComponent implements OnInit {
       this._form.addControl(question.id.toString(), new FormControl('', Validators.required));
     });
   }
+
+  public completeUrl(image: string | undefined): string {
+    return `assets/famosos/${image}`;
+  }
 }

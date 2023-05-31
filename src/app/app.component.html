@@ -11,7 +11,7 @@
           </div>
           <div fxLayout="row">
             <div *ngIf="question?.image" fxLayout="collumn">
-              <img src="{{question.image}}" alt="Pessoa">
+              <img src="{{this.completeUrl(question.image)}}" alt="Pessoa">
             </div>
             <div class="question__options" fxLayout="column">
               <ng-container *ngFor="let option of question.responses">

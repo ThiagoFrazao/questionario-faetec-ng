@@ -9,7 +9,7 @@ import {GraphData, QuizQuestion, UserResponse} from "./interfaces/quiz.interface
 })
 export class AppService {
 
-  private readonly BASE_URL: string = 'http://localhost:8080/api/questionario';
+  private readonly BASE_URL: string = 'http://questionario-faetec-2.sa-east-1.elasticbeanstalk.com/api/questionario';
 
   private _lastGraphData: BehaviorSubject<GraphData[]> = new BehaviorSubject<GraphData[]>([]);
 
